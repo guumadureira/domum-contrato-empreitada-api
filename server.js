@@ -314,6 +314,12 @@ function montarClausulaValoresPagamento(dados) {
 
   const linhas = [];
 
+  let subitem = 1;
+
+  function proximoSubitem() {
+    return `6.1.${subitem++}.`;
+  }
+
   linhas.push(
     `6.1. Pela execução dos serviços objeto deste contrato, o CONTRATANTE pagará à CONTRATADA o valor de ${texto(
       valores.valor_total,
@@ -327,14 +333,14 @@ function montarClausulaValoresPagamento(dados) {
   if (valores.possui_composicao_valores) {
     if (Array.isArray(valores.itens_valor) && valores.itens_valor.length > 0) {
       linhas.push(
-        `6.1.1. O valor contratado é composto pelas seguintes etapas ou itens:\n\n${formatarItensValor(
+        `${proximoSubitem()} O valor contratado é composto pelas seguintes etapas ou itens:\n\n${formatarItensValor(
           valores.itens_valor
         )}`
       );
     } else if (tem(valores.valor_mao_obra) || tem(valores.valor_materiais)) {
       linhas.push(
         [
-          "6.1.1. O valor contratado é composto da seguinte forma:",
+          `${proximoSubitem()} O valor contratado é composto da seguinte forma:`,
           "",
           `- Mão de obra: ${texto(valores.valor_mao_obra)} (${texto(
             valores.valor_mao_obra_extenso
@@ -355,7 +361,7 @@ function montarClausulaValoresPagamento(dados) {
   if (tipoPagamento === "entrada_etapas") {
     linhas.push(
       [
-        "6.1.2. O pagamento será realizado da seguinte forma:",
+        `${proximoSubitem()} O pagamento será realizado da seguinte forma:`,
         "",
         `- Entrada contratual: ${texto(pagamento.valor_entrada)} (${texto(
           pagamento.valor_entrada_extenso
@@ -372,7 +378,7 @@ function montarClausulaValoresPagamento(dados) {
   } else if (tipoPagamento === "entrada_parcelas") {
     linhas.push(
       [
-        "6.1.2. O pagamento será realizado da seguinte forma:",
+        `${proximoSubitem()} O pagamento será realizado da seguinte forma:`,
         "",
         `- Entrada contratual: ${texto(pagamento.valor_entrada)} (${texto(
           pagamento.valor_entrada_extenso
@@ -389,7 +395,7 @@ function montarClausulaValoresPagamento(dados) {
   } else if (tipoPagamento === "parcelado_simples") {
     linhas.push(
       [
-        "6.1.2. O pagamento será realizado da seguinte forma:",
+        `${proximoSubitem()} O pagamento será realizado da seguinte forma:`,
         "",
         `- Valor total: ${texto(valores.valor_total)} (${texto(
           valores.valor_total_extenso
@@ -403,16 +409,20 @@ function montarClausulaValoresPagamento(dados) {
     );
   } else if (tipoPagamento === "medicao") {
     linhas.push(
-      [
-        "6.1.2. O pagamento será realizado por medição dos serviços executados, conforme avanço físico da obra, escopo contratado e validação entre as partes.",
-        "6.1.3. Cada medição deverá considerar os serviços efetivamente executados no período, podendo ser acompanhada de relatório, registro fotográfico, planilha, diário de obra ou outro meio de comprovação acordado entre as partes.",
-        "6.1.4. Os valores apurados em cada medição deverão ser pagos pelo CONTRATANTE conforme prazo e forma previamente estabelecidos entre as partes."
-      ].join("\n\n")
+      `${proximoSubitem()} O pagamento será realizado por medição dos serviços executados, conforme avanço físico da obra, escopo contratado e validação entre as partes.`
+    );
+
+    linhas.push(
+      `${proximoSubitem()} Cada medição deverá considerar os serviços efetivamente executados no período, podendo ser acompanhada de relatório, registro fotográfico, planilha, diário de obra ou outro meio de comprovação acordado entre as partes.`
+    );
+
+    linhas.push(
+      `${proximoSubitem()} Os valores apurados em cada medição deverão ser pagos pelo CONTRATANTE conforme prazo e forma previamente estabelecidos entre as partes.`
     );
   } else {
     linhas.push(
       [
-        "6.1.2. O pagamento será realizado da seguinte forma:",
+        `${proximoSubitem()} O pagamento será realizado da seguinte forma:`,
         "",
         `- Pagamento à vista: ${texto(valores.valor_total)} (${texto(
           valores.valor_total_extenso
@@ -422,7 +432,7 @@ function montarClausulaValoresPagamento(dados) {
   }
 
   if (tem(pagamento.observacoes_pagamento)) {
-    linhas.push(`6.1.3. ${texto(pagamento.observacoes_pagamento)}`);
+    linhas.push(`${proximoSubitem()} ${texto(pagamento.observacoes_pagamento)}`);
   }
 
   linhas.push(
