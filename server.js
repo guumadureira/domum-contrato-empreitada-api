@@ -199,9 +199,13 @@ app.post("/gerar-contrato-empreitada", (req, res) => {
     const zip = new PizZip(content);
 
     const doc = new Docxtemplater(zip, {
-      paragraphLoop: true,
-      linebreaks: true
-    });
+  paragraphLoop: true,
+  linebreaks: true,
+  delimiters: {
+    start: "{{",
+    end: "}}"
+  }
+});
 
     doc.render(dadosContrato);
 
