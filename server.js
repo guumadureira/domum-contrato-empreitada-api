@@ -716,11 +716,11 @@ function montarClausulaForo(dados) {
 
 function montarBlocoAssinaturas(dados, representante) {
   const contratante = dados.contratante || {};
+
   const linhas = [
+    "________________________________________",
     "RODRIGUES & MADUREIRA LTDA",
     "CNPJ: 33.388.796/0001-50",
-    "",
-    "________________________________________",
     representante.nome
   ];
 
@@ -732,10 +732,9 @@ function montarBlocoAssinaturas(dados, representante) {
   linhas.push("");
 
   if (dados.tipo_contratante === "pessoa_juridica") {
+    linhas.push("________________________________________");
     linhas.push(texto(contratante.razao_social));
     linhas.push(`CNPJ: ${texto(contratante.cnpj)}`);
-    linhas.push("");
-    linhas.push("________________________________________");
     linhas.push(texto(contratante.representante_nome));
     linhas.push(`CPF: ${texto(contratante.representante_cpf)}`);
     linhas.push(texto(contratante.representante_cargo));
@@ -745,7 +744,11 @@ function montarBlocoAssinaturas(dados, representante) {
     linhas.push(`CPF: ${texto(contratante.cpf)}`);
   }
 
-  if (dados.possui_testemunhas && Array.isArray(dados.testemunhas) && dados.testemunhas.length > 0) {
+  if (
+    dados.possui_testemunhas &&
+    Array.isArray(dados.testemunhas) &&
+    dados.testemunhas.length > 0
+  ) {
     linhas.push("");
     linhas.push("TESTEMUNHAS");
     linhas.push("");
