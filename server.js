@@ -521,30 +521,23 @@ function montarClausulaObrigacoesContratante(dados) {
   const documentos = dados.documentos_tecnicos || {};
   const extras = lista(dados.obrigacoes_contratante_adicionais);
 
+  const topicos = [
+    "a) realizar os pagamentos nas datas, valores e condições estabelecidas neste contrato, na proposta comercial, no cronograma financeiro ou em seus anexos;",
+    "b) fornecer à CONTRATADA todas as informações, documentos, projetos, autorizações, aprovações, liberações e definições necessárias à execução dos serviços contratados;",
+    "c) garantir o acesso da CONTRATADA, de sua equipe, prestadores de serviço e fornecedores ao local da obra, em dias e horários compatíveis com a execução dos serviços;",
+    "d) manter disponíveis no local da obra as condições mínimas necessárias à execução, incluindo, quando aplicável, fornecimento de água, energia elétrica, esgoto, acesso físico, local para recebimento de materiais e demais estruturas indispensáveis ao andamento da empreitada;",
+    "e) aprovar materiais, especificações, alterações, compras, definições técnicas, etapas, medições ou decisões necessárias ao andamento da obra em tempo hábil;",
+    "f) comunicar formalmente à CONTRATADA qualquer solicitação de alteração de escopo, pausa, interrupção, substituição de materiais, modificação de projeto ou reprogramação da execução;",
+    "g) responsabilizar-se por custos, taxas, autorizações, serviços, contratações, fornecimentos ou obrigações que não estejam expressamente incluídos no escopo contratado;",
+    "h) não interferir diretamente na execução dos serviços, na gestão da equipe, na contratação de auxiliares ou na organização técnica da obra, salvo para solicitar esclarecimentos, registrar inconformidades ou aprovar decisões que dependam de sua manifestação;",
+    "i) comunicar por escrito qualquer inconformidade, divergência, vício aparente ou insatisfação relacionada aos serviços executados, permitindo que a CONTRATADA realize a análise técnica e adote as providências cabíveis;",
+    "j) não contratar diretamente integrantes da equipe, prestadores de serviço, fornecedores ou profissionais mobilizados, indicados ou apresentados pela CONTRATADA no contexto da execução da obra, salvo mediante autorização expressa da CONTRATADA;",
+    "k) responsabilizar-se pela veracidade das informações, documentos, projetos, medidas, condições do imóvel e demais dados fornecidos à CONTRATADA para elaboração, planejamento e execução da empreitada."
+  ].join("\n");
+
   const linhas = [
     "8.1. São obrigações do CONTRATANTE:",
-    "",
-    "a) realizar os pagamentos nas datas, valores e condições estabelecidas neste contrato, na proposta comercial, no cronograma financeiro ou em seus anexos;",
-    "",
-    "b) fornecer à CONTRATADA todas as informações, documentos, projetos, autorizações, aprovações, liberações e definições necessárias à execução dos serviços contratados;",
-    "",
-    "c) garantir o acesso da CONTRATADA, de sua equipe, prestadores de serviço e fornecedores ao local da obra, em dias e horários compatíveis com a execução dos serviços;",
-    "",
-    "d) manter disponíveis no local da obra as condições mínimas necessárias à execução, incluindo, quando aplicável, fornecimento de água, energia elétrica, esgoto, acesso físico, local para recebimento de materiais e demais estruturas indispensáveis ao andamento da empreitada;",
-    "",
-    "e) aprovar materiais, especificações, alterações, compras, definições técnicas, etapas, medições ou decisões necessárias ao andamento da obra em tempo hábil;",
-    "",
-    "f) comunicar formalmente à CONTRATADA qualquer solicitação de alteração de escopo, pausa, interrupção, substituição de materiais, modificação de projeto ou reprogramação da execução;",
-    "",
-    "g) responsabilizar-se por custos, taxas, autorizações, serviços, contratações, fornecimentos ou obrigações que não estejam expressamente incluídos no escopo contratado;",
-    "",
-    "h) não interferir diretamente na execução dos serviços, na gestão da equipe, na contratação de auxiliares ou na organização técnica da obra, salvo para solicitar esclarecimentos, registrar inconformidades ou aprovar decisões que dependam de sua manifestação;",
-    "",
-    "i) comunicar por escrito qualquer inconformidade, divergência, vício aparente ou insatisfação relacionada aos serviços executados, permitindo que a CONTRATADA realize a análise técnica e adote as providências cabíveis;",
-    "",
-    "j) não contratar diretamente integrantes da equipe, prestadores de serviço, fornecedores ou profissionais mobilizados, indicados ou apresentados pela CONTRATADA no contexto da execução da obra, salvo mediante autorização expressa da CONTRATADA;",
-    "",
-    "k) responsabilizar-se pela veracidade das informações, documentos, projetos, medidas, condições do imóvel e demais dados fornecidos à CONTRATADA para elaboração, planejamento e execução da empreitada."
+    topicos
   ];
 
   let proximo = 2;
@@ -579,7 +572,7 @@ function montarClausulaObrigacoesContratante(dados) {
   }
 
   if (extras.length > 0) {
-    linhas.push(`8.${proximo}. Obrigações adicionais do CONTRATANTE:\n\n${formatarLista(extras)}`);
+    linhas.push(`8.${proximo}. Obrigações adicionais do CONTRATANTE:\n${formatarLista(extras)}`);
   }
 
   return linhas.join("\n\n");
@@ -589,28 +582,22 @@ function montarClausulaObrigacoesContratada(dados) {
   const documentos = dados.documentos_tecnicos || {};
   const extras = lista(dados.obrigacoes_contratada_adicionais);
 
+  const topicos = [
+    "a) executar os serviços contratados conforme o escopo previsto neste instrumento, na proposta comercial, no orçamento, no memorial descritivo, nos documentos técnicos de referência e/ou nos anexos vinculados ao contrato, quando houver;",
+    "b) organizar, coordenar e administrar a equipe necessária à execução dos serviços contratados, podendo utilizar profissionais próprios, auxiliares, prestadores de serviço ou subcontratados, conforme a natureza da empreitada;",
+    "c) orientar sua equipe quanto à organização, segurança, higiene, disciplina e boas práticas aplicáveis ao canteiro de obras;",
+    "d) comunicar ao CONTRATANTE intercorrências relevantes que possam impactar prazo, custo, escopo, qualidade, sequência executiva ou continuidade dos serviços;",
+    "e) informar previamente a necessidade de alterações de escopo, serviços complementares, substituição de materiais, revisão de prazo, revisão de valor ou formalização de aditivo contratual, quando tais situações forem identificadas durante a execução;",
+    "f) responder por danos causados diretamente por sua atuação dolosa ou culposa, inclusive quando praticados por profissionais, prestadores ou subcontratados sob sua responsabilidade direta;",
+    "g) zelar pela correta execução dos serviços que estiverem sob sua responsabilidade, observadas as condições do local, os documentos técnicos disponíveis, o escopo contratado e as limitações expressamente previstas neste contrato;",
+    "h) manter comunicação com o CONTRATANTE pelos meios admitidos entre as partes, especialmente para registro de decisões, aprovações, ocorrências, pendências e solicitações relacionadas à obra;",
+    "i) recolher os tributos, encargos e obrigações fiscais incidentes sobre os valores recebidos em razão dos serviços contratados, observada a legislação aplicável;",
+    "j) manter autonomia técnica, administrativa e operacional na execução dos serviços contratados, sem subordinação trabalhista, empregatícia ou funcional ao CONTRATANTE."
+  ].join("\n");
+
   const linhas = [
     "9.1. São obrigações da CONTRATADA:",
-    "",
-    "a) executar os serviços contratados conforme o escopo previsto neste instrumento, na proposta comercial, no orçamento, no memorial descritivo, nos documentos técnicos de referência e/ou nos anexos vinculados ao contrato, quando houver;",
-    "",
-    "b) organizar, coordenar e administrar a equipe necessária à execução dos serviços contratados, podendo utilizar profissionais próprios, auxiliares, prestadores de serviço ou subcontratados, conforme a natureza da empreitada;",
-    "",
-    "c) orientar sua equipe quanto à organização, segurança, higiene, disciplina e boas práticas aplicáveis ao canteiro de obras;",
-    "",
-    "d) comunicar ao CONTRATANTE intercorrências relevantes que possam impactar prazo, custo, escopo, qualidade, sequência executiva ou continuidade dos serviços;",
-    "",
-    "e) informar previamente a necessidade de alterações de escopo, serviços complementares, substituição de materiais, revisão de prazo, revisão de valor ou formalização de aditivo contratual, quando tais situações forem identificadas durante a execução;",
-    "",
-    "f) responder por danos causados diretamente por sua atuação dolosa ou culposa, inclusive quando praticados por profissionais, prestadores ou subcontratados sob sua responsabilidade direta;",
-    "",
-    "g) zelar pela correta execução dos serviços que estiverem sob sua responsabilidade, observadas as condições do local, os documentos técnicos disponíveis, o escopo contratado e as limitações expressamente previstas neste contrato;",
-    "",
-    "h) manter comunicação com o CONTRATANTE pelos meios admitidos entre as partes, especialmente para registro de decisões, aprovações, ocorrências, pendências e solicitações relacionadas à obra;",
-    "",
-    "i) recolher os tributos, encargos e obrigações fiscais incidentes sobre os valores recebidos em razão dos serviços contratados, observada a legislação aplicável;",
-    "",
-    "j) manter autonomia técnica, administrativa e operacional na execução dos serviços contratados, sem subordinação trabalhista, empregatícia ou funcional ao CONTRATANTE."
+    topicos
   ];
 
   let proximo = 2;
@@ -637,64 +624,10 @@ function montarClausulaObrigacoesContratada(dados) {
   }
 
   if (extras.length > 0) {
-    linhas.push(`9.${proximo}. Obrigações adicionais da CONTRATADA:\n\n${formatarLista(extras)}`);
+    linhas.push(`9.${proximo}. Obrigações adicionais da CONTRATADA:\n${formatarLista(extras)}`);
   }
 
   return linhas.join("\n\n");
-}
-
-function montarClausulaRescisao(dados) {
-  const r = dados.rescisao || {};
-
-  const prazoInterrupcao = texto(r.prazo_interrupcao_contratada, "10");
-  const prazoAtrasoConclusao = texto(r.prazo_atraso_conclusao, "30");
-  const prazoAtrasoPagamento = texto(r.prazo_atraso_pagamento, "15");
-  const prazoSanacao = texto(r.prazo_sanacao_inadimplemento, "10");
-  const antecedenciaPausa = texto(r.antecedencia_pausa, "10");
-  const prazoPausa = texto(r.prazo_pausa_caracterizada, "20");
-  const prazoAbandono = texto(r.prazo_abandono, "12 meses");
-
-  return [
-    "10.1. O presente contrato poderá ser rescindido pelo CONTRATANTE nas seguintes hipóteses:",
-    "",
-    "a) inadimplemento de qualquer cláusula ou condição deste contrato pela CONTRATADA;",
-    "",
-    `b) interrupção injustificada dos serviços por período superior a ${prazoInterrupcao} dias consecutivos;`,
-    "",
-    `c) atraso injustificado no prazo total de conclusão dos serviços por período superior a ${prazoAtrasoConclusao} dias consecutivos, desde que não decorrente de culpa do CONTRATANTE, alteração de escopo, ausência de materiais, atraso de pagamentos, condições climáticas, caso fortuito, força maior ou fatores externos que impactem a execução;`,
-    "",
-    "d) descumprimento grave das obrigações assumidas pela CONTRATADA, desde que previamente comunicado e não sanado no prazo aplicável, quando possível.",
-    "",
-    "10.2. O presente contrato poderá ser rescindido pela CONTRATADA nas seguintes hipóteses:",
-    "",
-    "a) inadimplemento de qualquer cláusula ou condição deste contrato pelo CONTRATANTE;",
-    "",
-    `b) atraso no pagamento de qualquer parcela, etapa, medição ou valor devido por período superior a ${prazoAtrasoPagamento} dias consecutivos;`,
-    "",
-    "c) impossibilidade de continuidade dos serviços por ausência de materiais, informações, aprovações, acessos, autorizações ou condições mínimas de execução;",
-    "",
-    "d) alteração substancial do escopo contratado sem formalização de aditivo contratual;",
-    "",
-    "e) interferência indevida do CONTRATANTE na equipe, fornecedores, prestadores de serviço, sequência executiva ou organização técnica da obra;",
-    "",
-    "f) conduta do CONTRATANTE que inviabilize a continuidade da relação contratual ou a adequada execução dos serviços.",
-    "",
-    `10.3. Em caso de inadimplemento total ou parcial de qualquer obrigação prevista neste contrato, a parte inadimplente poderá ser notificada para sanar a irregularidade no prazo de ${prazoSanacao} dias corridos, salvo quando a gravidade ou a natureza do descumprimento justificar rescisão imediata.`,
-    "",
-    "10.4. No caso de rescisão, a CONTRATADA poderá apresentar levantamento dos serviços executados, serviços em andamento, materiais adquiridos, materiais comprometidos, custos incorridos, despesas de mobilização, desmobilização ou reprogramação, bem como eventuais valores pendentes de pagamento.",
-    "",
-    `10.5. Em caso de solicitação de pausa, suspensão ou interrupção da obra por iniciativa do CONTRATANTE, este deverá comunicar a CONTRATADA com antecedência mínima de ${antecedenciaPausa} dias úteis.`,
-    "",
-    "10.6. Antes da paralisação solicitada pelo CONTRATANTE, deverão ser quitados os serviços já executados, os serviços em andamento, os materiais já adquiridos ou comprometidos e eventuais custos decorrentes de desmobilização, remobilização, armazenamento, reagendamento de equipe ou reprogramação da obra.",
-    "",
-    `10.7. Quando a interrupção solicitada pelo CONTRATANTE exceder ${prazoPausa} dias corridos, poderá ser caracterizada pausa contratual, sendo necessária a reavaliação do cronograma, da disponibilidade de equipe, dos custos e das condições de retomada.`,
-    "",
-    `10.8. Caso o CONTRATANTE deixe de dar andamento à contratação, deixe de responder solicitações essenciais, suspenda indefinidamente a obra ou permaneça inerte por período superior a ${prazoAbandono}, o contrato poderá ser considerado encerrado, sem prejuízo da cobrança dos valores devidos até então.`,
-    "",
-    "10.9. Para retomada posterior dos serviços após abandono, pausa prolongada ou encerramento operacional, poderá ser exigida nova contratação, novo orçamento ou aditivo contratual, conforme avaliação da CONTRATADA.",
-    "",
-    "10.10. Na hipótese de resilição bilateral, as partes poderão formalizar Termo de Distrato, estabelecendo as condições de encerramento, quitação, pendências, pagamentos devidos, entrega de documentos e demais obrigações remanescentes."
-  ].join("\n");
 }
 
 function montarClausulaMultas(dados) {
