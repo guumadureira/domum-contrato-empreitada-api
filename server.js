@@ -97,8 +97,16 @@ function montarDadosContrato(dados) {
       contratante
     ),
 
-    representante_domum_nome: representante.nome,
-    representante_domum_registro: representante.registro,
+    bloco_contratada: [
+  "Empresa: RODRIGUES & MADUREIRA LTDA",
+  "Nome fantasia: DOMUM ENGENHARIA",
+  "CNPJ: 33.388.796/0001-50",
+  "Endereço: Rua Santos Dumont, nº 3213, Sala 04, Maringá-PR, CEP 87013-050",
+  "E-mail: domumenge@outlook.com",
+  "Telefone: (44) 99136-5956",
+  `Representante: ${representante.nome}`,
+  `CREA: ${representante.registro}`
+].join("\n"),
 
     clausula_objeto_conteudo:
       dados.clausula_objeto_conteudo ||
