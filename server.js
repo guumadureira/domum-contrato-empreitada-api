@@ -639,7 +639,59 @@ function montarClausulaObrigacoesContratada(dados) {
 
   return linhas.join("\n\n");
 }
+function montarClausulaRescisao(dados) {
+  const r = dados.rescisao || {};
 
+  const prazoInterrupcao = texto(r.prazo_interrupcao_contratada, "10");
+  const prazoAtrasoConclusao = texto(r.prazo_atraso_conclusao, "30");
+  const prazoAtrasoPagamento = texto(r.prazo_atraso_pagamento, "15");
+  const prazoSanacao = texto(r.prazo_sanacao_inadimplemento, "10");
+  const antecedenciaPausa = texto(r.antecedencia_pausa, "10");
+  const prazoPausa = texto(r.prazo_pausa_caracterizada, "20");
+  const prazoAbandono = texto(r.prazo_abandono, "12 meses");
+
+  return [
+    "10.1. O presente contrato poderá ser rescindido pelo CONTRATANTE nas seguintes hipóteses:",
+    "",
+    "a) inadimplemento de qualquer cláusula ou condição deste contrato pela CONTRATADA;",
+    "",
+    `b) interrupção injustificada dos serviços por período superior a ${prazoInterrupcao} dias consecutivos;`,
+    "",
+    `c) atraso injustificado no prazo total de conclusão dos serviços por período superior a ${prazoAtrasoConclusao} dias consecutivos, desde que não decorrente de culpa do CONTRATANTE, alteração de escopo, ausência de materiais, atraso de pagamentos, condições climáticas, caso fortuito, força maior ou fatores externos que impactem a execução;`,
+    "",
+    "d) descumprimento grave das obrigações assumidas pela CONTRATADA, desde que previamente comunicado e não sanado no prazo aplicável, quando possível.",
+    "",
+    "10.2. O presente contrato poderá ser rescindido pela CONTRATADA nas seguintes hipóteses:",
+    "",
+    "a) inadimplemento de qualquer cláusula ou condição deste contrato pelo CONTRATANTE;",
+    "",
+    `b) atraso no pagamento de qualquer parcela, etapa, medição ou valor devido por período superior a ${prazoAtrasoPagamento} dias consecutivos;`,
+    "",
+    "c) impossibilidade de continuidade dos serviços por ausência de materiais, informações, aprovações, acessos, autorizações ou condições mínimas de execução;",
+    "",
+    "d) alteração substancial do escopo contratado sem formalização de aditivo contratual;",
+    "",
+    "e) interferência indevida do CONTRATANTE na equipe, fornecedores, prestadores de serviço, sequência executiva ou organização técnica da obra;",
+    "",
+    "f) conduta do CONTRATANTE que inviabilize a continuidade da relação contratual ou a adequada execução dos serviços.",
+    "",
+    `10.3. Em caso de inadimplemento total ou parcial de qualquer obrigação prevista neste contrato, a parte inadimplente poderá ser notificada para sanar a irregularidade no prazo de ${prazoSanacao} dias corridos, salvo quando a gravidade ou a natureza do descumprimento justificar rescisão imediata.`,
+    "",
+    "10.4. No caso de rescisão, a CONTRATADA poderá apresentar levantamento dos serviços executados, serviços em andamento, materiais adquiridos, materiais comprometidos, custos incorridos, despesas de mobilização, desmobilização ou reprogramação, bem como eventuais valores pendentes de pagamento.",
+    "",
+    `10.5. Em caso de solicitação de pausa, suspensão ou interrupção da obra por iniciativa do CONTRATANTE, este deverá comunicar a CONTRATADA com antecedência mínima de ${antecedenciaPausa} dias úteis.`,
+    "",
+    "10.6. Antes da paralisação solicitada pelo CONTRATANTE, deverão ser quitados os serviços já executados, os serviços em andamento, os materiais já adquiridos ou comprometidos e eventuais custos decorrentes de desmobilização, remobilização, armazenamento, reagendamento de equipe ou reprogramação da obra.",
+    "",
+    `10.7. Quando a interrupção solicitada pelo CONTRATANTE exceder ${prazoPausa} dias corridos, poderá ser caracterizada pausa contratual, sendo necessária a reavaliação do cronograma, da disponibilidade de equipe, dos custos e das condições de retomada.`,
+    "",
+    `10.8. Caso o CONTRATANTE deixe de dar andamento à contratação, deixe de responder solicitações essenciais, suspenda indefinidamente a obra ou permaneça inerte por período superior a ${prazoAbandono}, o contrato poderá ser considerado encerrado, sem prejuízo da cobrança dos valores devidos até então.`,
+    "",
+    "10.9. Para retomada posterior dos serviços após abandono, pausa prolongada ou encerramento operacional, poderá ser exigida nova contratação, novo orçamento ou aditivo contratual, conforme avaliação da CONTRATADA.",
+    "",
+    "10.10. Na hipótese de resilição bilateral, as partes poderão formalizar Termo de Distrato, estabelecendo as condições de encerramento, quitação, pendências, pagamentos devidos, entrega de documentos e demais obrigações remanescentes."
+  ].join("\n");
+}
 function montarClausulaMultas(dados) {
   const m = dados.multas || {};
 
