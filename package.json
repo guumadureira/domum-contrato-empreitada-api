@@ -1,0 +1,15 @@
+{
+  "name": "domum-contrato-empreitada-api",
+  "version": "1.0.0",
+  "description": "API para geração de contratos de empreitada da DOMUM Engenharia",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.18.3"
+  }
+}
