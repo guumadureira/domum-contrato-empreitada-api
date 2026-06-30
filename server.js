@@ -205,7 +205,6 @@ function montarClausulaDocumentosTecnicos(dados, representante) {
 
 function montarClausulaServicos(dados) {
   const inclusos = lista(dados.servicos_inclusos);
-  const naoInclusos = lista(dados.servicos_nao_inclusos);
 
   const linhas = [
     "4.1. A CONTRATADA prestará os serviços necessários à execução do escopo contratado, observadas as condições previstas neste instrumento, nos documentos técnicos de referência, na proposta comercial, no orçamento, no memorial descritivo e/ou nos anexos vinculados ao presente contrato, quando houver.",
@@ -217,23 +216,9 @@ function montarClausulaServicos(dados) {
     `4.7. Estão inclusos no presente contrato os seguintes serviços:\n\n${formatarLista(
       inclusos,
       "- Serviços conforme escopo técnico aprovado entre as partes."
-    )}`
+    )}`,
+    "4.8. Fica expressamente excluído do presente contrato tudo aquilo que não estiver descrito como serviço incluso, obrigação da CONTRATADA ou item expressamente contratado entre as partes."
   ];
-
-  if (naoInclusos.length > 0) {
-    linhas.push(
-      `4.8. Não estão inclusos no presente contrato, salvo contratação complementar expressa, os seguintes serviços, fornecimentos ou responsabilidades:\n\n${formatarLista(
-        naoInclusos
-      )}`
-    );
-    linhas.push(
-      "4.9. Fica expressamente excluído do presente contrato tudo aquilo que não estiver descrito como serviço incluso, obrigação da CONTRATADA ou item expressamente contratado entre as partes."
-    );
-  } else {
-    linhas.push(
-      "4.8. Fica expressamente excluído do presente contrato tudo aquilo que não estiver descrito como serviço incluso, obrigação da CONTRATADA ou item expressamente contratado entre as partes."
-    );
-  }
 
   return linhas.join("\n\n");
 }
