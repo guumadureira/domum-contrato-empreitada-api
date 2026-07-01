@@ -997,14 +997,30 @@ function nomeArquivoSeguro(dados) {
 
 app.post("/gerar-contrato-empreitada", async (req, res) => {
   try {
-    const apiKey = req.headers["x-api-key"];
+    const apiKeyEsperada = String(process.env.API_KEY || "").trim();
 
-    if (process.env.API_KEY && apiKey !== process.env.API_KEY) {
-      return res.status(401).json({
-        sucesso: false,
-        mensagem: "Acesso não autorizado."
-      });
-    }
+if (!apiKeyEsperada) {
+  return res.status(500).json({
+    sucesso: false,
+    mensagem: "API_KEY não configurada no servidor."
+  });
+}
+
+const chaveHeader = String(req.headers["x-api-key"] || "").trim();
+
+const authorization = String(req.headers["authorization"] || "").trim();
+const chaveBearer = authorization.toLowerCase().startsWith("bearer ")
+  ? authorization.slice(7).trim()
+  : "";
+
+const apiKeyRecebida = chaveHeader || chaveBearer;
+
+if (apiKeyRecebida !== apiKeyEsperada) {
+  return res.status(401).json({
+    sucesso: false,
+    mensagem: "Acesso não autorizado."
+  });
+}
 
     const dados = req.body || {};
 
